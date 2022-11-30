@@ -1,16 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from odoo import modules
-import requests
-import logging
-import base64
-
-
-def create_string():
-    self = str.split(',')
-    print(self)
-    return self[-1]
 
 
 class ToolsControl(models.Model):
@@ -20,12 +10,14 @@ class ToolsControl(models.Model):
     action = fields.Char()
     date = fields.Char()
     area = fields.Char()
-    photo = fields.Binary(string="Image")
+    photo = fields.Binary(
+        string="Image",
+        compute="_compute_image",
+        store=True,
+        attachment=False
+    )
 
-    def create(self, action, date, area, photo):
-        self.action = action
-        self.date = date
-        self.area = area
-        self.photo = (photo.split(','))[-1]
-
-
+    @api.model
+    def create(self, vals):
+        vals['photo'] = vals['photo'].split(',')[1]
+        return super(ToolsControl, self).create(vals)
