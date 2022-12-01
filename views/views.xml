@@ -23,6 +23,7 @@
                <field name="action" />
                <field name="area" />
                <field name="date" />
+               <field name="create_date"/>
                <field name="photo" />
                <templates>
                   <t t-name="kanban-box">
@@ -39,6 +40,11 @@
                               </li>
                               <li t-if="record.date.raw_value" class="o_text_overflow">
                                  <field name="date" />
+                              </li>
+                              </ul>
+                              <ul>
+                              <li t-if="record.create_date.raw_value" class="o_text_overflow">
+                                 <field name="create_date" />
                               </li>
                            </ul>
                         </div>
