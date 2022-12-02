@@ -21,3 +21,5 @@ class ToolsControl(models.Model):
     def create(self, vals):
         vals['photo'] = vals['photo'].split(',')[1]
         return super(ToolsControl, self).create(vals)
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.module.category" id="tools_control.module_category_tools_control">
+        <field name="name">Tools Control</field>
+        <field name="description">Category For Tools Control</field>
+        <field name="sequence">10</field>
+    </record>
+        <record id="tool_control_group_user" model="res.groups">
+        <field name="name">User / Tool Control</field>
+        <field name="category_id" ref="tools_control.module_category_tools_control"/>
+        <field name="implied_ids" eval="[(4, ref('tool_control_group_manager')]"/>
+    </record>
+    <record id="tool_control_group_manager" model="res.groups">
+        <field name="name">Manager / Tool Control</field>
+        <field name="category_id" ref="tools_control.module_category_tools_control"/>
+        <field name="implied_ids" eval="[(4, ref('tool_control_group_user')]"/>
+    </record>
+
+</odoo>

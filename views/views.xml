@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
    <data>
-      <!-- explicit list view definition -->
+
       <record model="ir.ui.view" id="tools_control.list">
          <field name="name">tools_control list</field>
          <field name="model">tools_control.tools_control</field>
@@ -14,6 +14,7 @@
             </tree>
          </field>
       </record>
+
       <record model="ir.ui.view" id="tools_control.kanban">
          <field name="name">tools_control kanban</field>
          <field name="model">tools_control.tools_control</field>
@@ -23,7 +24,6 @@
                <field name="action" />
                <field name="area" />
                <field name="date" />
-               <field name="create_date"/>
                <field name="photo" />
                <templates>
                   <t t-name="kanban-box">
@@ -41,19 +41,21 @@
                               <li t-if="record.date.raw_value" class="o_text_overflow">
                                  <field name="date" />
                               </li>
-                              </ul>
-                              <ul>
+                           </ul>
+                           <ul>
                               <li t-if="record.create_date.raw_value" class="o_text_overflow">
                                  <field name="create_date" />
                               </li>
                            </ul>
                         </div>
+
                      </div>
                   </t>
                </templates>
             </kanban>
          </field>
       </record>
+
       <record model="ir.ui.view" id="room_booking_form">
          <field name="name">tools_control form</field>
          <field name="model">tools_control.tools_control</field>
@@ -66,31 +68,19 @@
                      <field name="area" />
                   </group>
                   <group>
-                     <field name="photo" widget="image" class="oe_avatar" />
+                     <field name="photo" widget="image" options ="{'size': [800, 600]}" class="oe_avatar"/>
                   </group>
                </sheet>
             </form>
          </field>
       </record>
+
       <!-- actions opening views on models -->
       <record model="ir.actions.act_window" id="tools_control.action_window">
          <field name="name">Alert</field>
          <field name="res_model">tools_control.tools_control</field>
          <field name="view_mode">kanban,tree,form</field>
       </record>
-      <!-- server action to the one above -->
-      <record model="ir.actions.server" id="tools_control.action_server">
-         <field name="name">tools_control server</field>
-         <field name="model_id" ref="model_tools_control_tools_control" />
-         <field name="state">code</field>
-         <field name="code">action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }</field>
-      </record>
-      <menuitem name="Tools control" id="tools_control.menu_root" />
-      <menuitem name="Alerts" id="tools_control.menu_1" parent="tools_control.menu_root" />
-      <menuitem name="List" id="tools_control.menu_1_list" parent="tools_control.menu_1" action="tools_control.action_window" />
+
    </data>
 </odoo>
