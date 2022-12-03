@@ -48,7 +48,6 @@
                               </li>
                            </ul>
                         </div>
-
                      </div>
                   </t>
                </templates>
@@ -60,18 +59,30 @@
          <field name="name">tools_control form</field>
          <field name="model">tools_control.tools_control</field>
          <field name="arch" type="xml">
-            <form>
-               <sheet>
-                  <group>
-                     <field name="action" />
-                     <field name="date" />
-                     <field name="area" />
-                  </group>
-                  <group>
-                     <field name="photo" widget="image" options ="{'size': [800, 600]}" class="oe_avatar"/>
-                  </group>
-               </sheet>
-            </form>
+         <form string="Tools Control">
+            <sheet>
+             <div class="oe_button_box" name="button_box">
+             </div>
+                  <field name="photo" widget="image" options="{'size': [400, 300]}" class="oe_avatar"/>
+               <div name="title_name" class="oe_title">
+                   <h1>
+                       <table>
+                           <tr>
+                               <td>
+                                   <field name="action" required="1" placeholder="Action" style="padding-right:10px"/>
+                               </td>
+                           </tr>
+                       </table>
+                   </h1>
+               </div>
+               <group>
+                  <field name="date"/>
+               </group>
+               <group>
+                  <field name="area"/>
+               </group>
+            </sheet>
+         </form>
          </field>
       </record>
 
