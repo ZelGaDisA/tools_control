@@ -24,6 +24,14 @@ class ToolsControl(http.Controller):
 
         return alerts
 
+    @http.route('/api_create', auth='public', website=False, crf=False, type='json', methods=['GET', 'POST'])
+    def create_alert(self, **kw):
+        alerts = http.request.env['tools_control.tools_control'].sudo().search(
+            [('action', '=', kw['action'])])
+        alerts.write({'date': kw['date'],
+                        'area': kw['area'],
+                        'photo': kw['photo'], })
+        return kw
 
     @http.route('/get_tools_control', type="json", auth='public', cors='*', methods=['GET', 'POST'], crf=False)
     def get_all_alert(self):
