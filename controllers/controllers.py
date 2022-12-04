@@ -12,7 +12,7 @@ class ToolsControl(http.Controller):
     # @http.route('/api', auth='public', website=False)
     @http.route('/api', auth='public', website=False, crf=False, type='json', methods=['GET', 'POST'])
     def all_alerts(self, **kw):
-        alert_rec = http.request.env['tools_control.tools_control'].sudo.search([])
+        alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
         for rec in alert_rec:
             alerts.append({
