@@ -26,17 +26,18 @@ class ToolsControl(http.Controller):
 
     @http.route('/api_create', auth='public', website=False, crf=False, type='json', methods=['GET', 'POST'])
     def create_alert(self, **kw):
-        http.request.env['tools_control.tools_control'].sudo().create({
-                'action': kw['action'],
-                'date': kw['date'],
-                'area': kw['area'],
-                'photo': kw['photo'],
-            })
-        # alerts = http.request.env['tools_control.tools_control'].sudo().search(
-        #     [('action', '=', kw['action'])])
-        # alerts.write({'date': kw['date'],
-        #                 'area': kw['area'],
-        #                 'photo': kw['photo'], })
+        # http.request.env['tools_control.tools_control'].sudo().create({
+        #         'action': kw['action'],
+        #         'date': kw['date'],
+        #         'area': kw['area'],
+        #         'photo': kw['photo'],
+        #     })
+        alerts = http.request.env['tools_control.tools_control'].sudo().search(
+            [('id', '=', kw['id'])])
+        alerts.write({'action': kw['action'],
+                        'date': kw['date'],
+                        'area': kw['area'],
+                        'photo': kw['photo'], })
         return kw
 
     @http.route('/get_tools_control', type="json", auth='public', cors='*', methods=['GET', 'POST'], crf=False)
