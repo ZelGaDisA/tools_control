@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+from crypt import methods
 
 from odoo import http
 from odoo.http import request
@@ -113,6 +114,6 @@ class ToolsControl(http.Controller):
                 }
         return args
 
-    @http.route('/ping', type='json', crf=False)
+    @http.route('/ping', type='json', crf=False, methods=['GET'])
     def ping(self):
         return {'success': True}
