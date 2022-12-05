@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
+import json
+
 from odoo import http
 from odoo.http import request
-import json
 
 
 class ToolsControl(http.Controller):
-    @http.route('/tools_control/tools_control', auth='public', crf=False)
-    def index(self, **kw):
-        return "Hello, world"
 
-    # @http.route('/api', auth='public', website=False)
-    @http.route('/api', auth='public', website=False, crf=True, cors='*', type='json', methods=['GET', 'POST'])
+    @http.route('/api', auth='user', website=False, crf=True, cors='*', type='json', methods=['GET'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
@@ -34,9 +31,9 @@ class ToolsControl(http.Controller):
         # alerts = http.request.env['tools_control.tools_control'].sudo().search([('id', '=', kw['id'])])
         alerts = http.request.env['tools_control.tools_control'].sudo().search([()])
         alerts.write({'action': kw['action'],
-                        'date': kw['date'],
-                        'area': kw['area'],
-                        'photo': kw['photo'], })
+                      'date': kw['date'],
+                      'area': kw['area'],
+                      'photo': kw['photo'], })
         return kw
 
     @http.route('/get_tools_control', type="json", auth='public', cors='*', methods=['GET', 'POST'], crf=False)
@@ -66,7 +63,8 @@ class ToolsControl(http.Controller):
             'objects': http.request.env['tools_control.tools_control'].search([]),
         })
 
-    @http.route('/tools_control/tools_control/objects/<model("tools_control.tools_control"):obj>', auth='public', crf=False)
+    @http.route('/tools_control/tools_control/objects/<model("tools_control.tools_control"):obj>', auth='public',
+                crf=False)
     def object(self, obj, **kw):
         return http.request.render('tools_control.object', {
             'object': obj
