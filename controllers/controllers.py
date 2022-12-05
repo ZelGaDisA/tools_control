@@ -10,7 +10,7 @@ class ToolsControl(http.Controller):
         return "Hello, world"
 
     # @http.route('/api', auth='public', website=False)
-    @http.route('/api', auth='public', website=False, crf=False, cors='*', type='json', methods=['GET', 'POST'])
+    @http.route('/api', auth='user', website=False, crf=True, cors='*', type='json', methods=['GET', 'POST'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
@@ -24,7 +24,7 @@ class ToolsControl(http.Controller):
 
         return alerts
 
-    @http.route('/api_create', auth='public', website=False, crf=False, type='json', methods=['GET', 'POST'])
+    @http.route('/api_create', auth='public', website=False, crf=False, cors='*', type='json', methods=['GET', 'POST'])
     def create_alert(self, **kw):
         # http.request.env['tools_control.tools_control'].sudo().create({
         #         'action': kw['action'],
