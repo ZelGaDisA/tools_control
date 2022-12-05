@@ -10,7 +10,7 @@ class ToolsControl(http.Controller):
         return "Hello, world"
 
     # @http.route('/api', auth='public', website=False)
-    @http.route('/api', auth='public', website=False, crf=False, type='json', methods=['GET', 'POST'])
+    @http.route('/api', auth='public', website=False, crf=False, cors='*', type='json', methods=['GET', 'POST'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
@@ -31,8 +31,8 @@ class ToolsControl(http.Controller):
         #         'date': kw['date'],
         #         'area': kw['area'],
         #         'photo': kw['photo'],
-        #     })
-        alerts = http.request.env['tools_control.tools_control'].sudo().search([('id', '=', kw['id'])])
+        # alerts = http.request.env['tools_control.tools_control'].sudo().search([('id', '=', kw['id'])])
+        alerts = http.request.env['tools_control.tools_control'].sudo().search([()])
         alerts.write({'action': kw['action'],
                         'date': kw['date'],
                         'area': kw['area'],
