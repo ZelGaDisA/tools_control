@@ -32,8 +32,7 @@ class ToolsControl(http.Controller):
         #         'area': kw['area'],
         #         'photo': kw['photo'],
         #     })
-        alerts = http.request.env['tools_control.tools_control'].sudo().search(
-            [('id', '=', kw['id'])])
+        alerts = http.request.env['tools_control.tools_control'].sudo().search([('id', '=', kw['id'])])
         alerts.write({'action': kw['action'],
                         'date': kw['date'],
                         'area': kw['area'],
@@ -47,7 +46,6 @@ class ToolsControl(http.Controller):
         for rec in alert_rec:
             print('rec.photo', type(rec.photo))
             vals = {
-                'id': rec.id,
                 'action': rec.action,
                 'date': rec.date,
                 'area': rec.area,
