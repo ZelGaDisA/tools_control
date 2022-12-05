@@ -120,10 +120,3 @@ class ToolsControl(http.Controller):
                         },
                 }
         return args
-
-    @http.route('/data_accessed', auth="public")
-    def get_all_record(self, **kw):
-        tools_control = http.request.env['tools_control.tools_control'].search([])
-        for record in tools_control:
-            print(record['area'])
-        return "<h1>Data Accessed</h1>"
