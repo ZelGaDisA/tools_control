@@ -23,12 +23,6 @@ class ToolsControl(http.Controller):
 
     @http.route('/api_create', auth='public', website=False, crf=False, cors='*', type='json', methods=['GET', 'POST'])
     def create_alert(self, **kw):
-        # http.request.env['tools_control.tools_control'].sudo().create({
-        #         'action': kw['action'],
-        #         'date': kw['date'],
-        #         'area': kw['area'],
-        #         'photo': kw['photo'],
-        # alerts = http.request.env['tools_control.tools_control'].sudo().search([('id', '=', kw['id'])])
         alerts = http.request.env['tools_control.tools_control'].sudo().search([()])
         alerts.write({'action': kw['action'],
                       'date': kw['date'],
@@ -118,3 +112,7 @@ class ToolsControl(http.Controller):
                         },
                 }
         return args
+
+    @http.route('/ping', type='json', crf=False)
+    def ping(self):
+        return {'success': True}
