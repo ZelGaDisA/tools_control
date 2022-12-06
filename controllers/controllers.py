@@ -3,7 +3,7 @@ from odoo.http import request
 
 
 class ToolsControl(http.Controller):
-    @http.route('/tools/get_all_alerts', auth='user', crf=True, type='json', methods=['POST'])
+    @http.route('/tools/get_all_alerts', auth='user', type='json', methods=['POST'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
@@ -17,7 +17,7 @@ class ToolsControl(http.Controller):
 
         return alerts
 
-    @http.route('/tools/create_alert', auth='user', website=False, crf=True, type='json', methods=['POST'])
+    @http.route('/tools/create_alert', auth='user', type='json', methods=['POST'])
     def create(self, **rec):
         if http.request.render:
             if rec['action']:
@@ -31,7 +31,6 @@ class ToolsControl(http.Controller):
                 args = {'success': True, 'message': 'Success', 'ID': new_alert.id}
         return args
 
-
-    @http.route('/tools/ping', type='json', auth='public', crf=False, methods=['POST'])
+    @http.route('/tools/ping', type='json', auth='public', methods=['POST'])
     def ping(self):
         return {'success': True}
