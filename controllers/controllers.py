@@ -31,6 +31,7 @@ class ToolsControl(http.Controller):
                 args = {'success': True, 'message': 'Success', 'ID': new_alert.id}
         return args
 
+
     @http.route('/tools/ping', type='json', auth='public', crf=False, methods=['POST'])
     def ping(self):
         return {'success': True}
