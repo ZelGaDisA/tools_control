@@ -3,7 +3,7 @@ from odoo import models, fields, api
 
 class ToolsControl(models.Model):
     _name = 'tools_control.tools_control'
-    _description = 'tools_control.tools_control'
+    _description = 'Tools Control'
     _rec_name = 'action'
 
     action = fields.Char()
