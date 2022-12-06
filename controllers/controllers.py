@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
 from odoo import http
 from odoo.http import request
 import json
 
 
 class ToolsControl(http.Controller):
+    @http.route('/tools_control/tools_control', auth='public', crf=False)
+    def index(self, **kw):
+        return "Hello, world"
 
     @http.route('/api', auth='public', website=False, crf=True, cors='*', type='json', methods=['GET'])
     def all_alerts(self, **kw):
@@ -27,6 +31,26 @@ class ToolsControl(http.Controller):
                       'area': kw['area'],
                       'photo': kw['photo'], })
         return kw
+
+    @http.route('/get_tools_control', type="json", auth='public', cors='*', methods=['GET', 'POST'], crf=False)
+    def get_all_alert(self):
+        alert_rec = request.env['tools_control.tools_control'].sudo.search([])
+        alerts = []
+        for rec in alert_rec:
+            print('rec.photo', type(rec.photo))
+            vals = {
+                'action': rec.action,
+                'date': rec.date,
+                'area': rec.area,
+                'photo': rec.photo,
+            }
+            alerts.append(vals)
+        data = {
+            'status': '200',
+            'message': 'success',
+            'response': alerts
+        }
+        return data
 
     @http.route('/api_alert', type='json', auth='user', methods=['POST'], cors='*', csrf=False)
     def create_employee(self, **kwargs):
@@ -55,9 +79,9 @@ class ToolsControl(http.Controller):
                     employee = employee.id
             return {'message': 'Employee {} created'.format(employee)}
 
-    @http.route('/create_alert', type="json", auth='public', crf=False)
-    def create_patient(self, **rec):
-        if request.jsonrequest:
+    @http.route('/create_alert', auth="public", type='json')
+    def create(self, **rec):
+        if http.request.render:
             if rec['action']:
                 vals = {
                     'action': rec['action'],
@@ -69,5 +93,6 @@ class ToolsControl(http.Controller):
                 args = {'success': True, 'message': 'Success', 'ID': new_alert.id}
         return args
 
-    @http.route('/ping', type='json', crf=False, methods=['GET'])
+    @http.route('/ping', type='json', crf=False)
     def ping(self):
+        return {'success': True}
