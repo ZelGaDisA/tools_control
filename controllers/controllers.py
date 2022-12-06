@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-import json
-
 from odoo import http
 from odoo.http import request
+import json
 
 
 class ToolsControl(http.Controller):
+    @http.route('/tools_control/tools_control', auth='public', crf=False)
+    def index(self, **kw):
+        return "Hello, world"
 
-    @http.route('/api', auth='user', website=False, crf=True, cors='*', type='json', methods=['GET'])
+    @http.route('/api', auth='public', website=False, crf=True, cors='*', type='json', methods=['GET'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
@@ -50,20 +52,6 @@ class ToolsControl(http.Controller):
         }
         return data
 
-    @http.route('/tools_control/tools_control/objects', auth='public', crf=False)
-    def list(self, **kw):
-        return http.request.render('tools_control.listing', {
-            'root': '/tools_control/tools_control',
-            'objects': http.request.env['tools_control.tools_control'].search([]),
-        })
-
-    @http.route('/tools_control/tools_control/objects/<model("tools_control.tools_control"):obj>', auth='public',
-                crf=False)
-    def object(self, obj, **kw):
-        return http.request.render('tools_control.object', {
-            'object': obj
-        })
-
     @http.route('/api_alert', type='json', auth='user', methods=['POST'], cors='*', csrf=False)
     def create_employee(self, **kwargs):
         data = json.loads(request.httprequest.data)
@@ -91,9 +79,9 @@ class ToolsControl(http.Controller):
                     employee = employee.id
             return {'message': 'Employee {} created'.format(employee)}
 
-    @http.route('/create_alert', type="json", auth='public', crf=False)
-    def create_patient(self, **rec):
-        if request.jsonrequest:
+    @http.route('/create_alert', auth="public", type='json')
+    def create(self, **rec):
+        if http.request.render:
             if rec['action']:
                 vals = {
                     'action': rec['action'],
@@ -102,15 +90,7 @@ class ToolsControl(http.Controller):
                     'photo': rec['photo'],
                 }
                 new_alert = request.env['tools_control.tools_control'].sudo().create(vals)
-                args = {
-                    'meaasge': 'success',
-                    'success': 'True',
-                    'data':
-                        {
-                            'id': new_alert.id,
-                            'action': new_alert.action
-                        },
-                }
+                args = {'success': True, 'message': 'Success', 'ID': new_alert.id}
         return args
 
     @http.route('/ping', type='json', crf=False)
