@@ -5,7 +5,7 @@ import json
 
 
 class ToolsControl(http.Controller):
-    @http.route('/tools/get_all_alerts', auth='user', crf=True, cors='*', type='json', methods=['POST'])
+    @http.route('/tools/get_all_alerts', auth='public', crf=True, cors='*', type='json', methods=['POST'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
