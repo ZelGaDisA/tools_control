@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-<<<<<<< HEAD
-import json
-from crypt import methods
-
-=======
->>>>>>> main
 from odoo import http
 from odoo.http import request
 import json
