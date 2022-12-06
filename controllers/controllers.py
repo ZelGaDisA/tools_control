@@ -5,7 +5,7 @@ import json
 
 
 class ToolsControl(http.Controller):
-    @http.route('/get_all_alerts', auth='public', website=False, crf=True, cors='*', type='json', methods=['GET'])
+    @http.route('/get_all_alerts', auth='user', website=False, crf=True, cors='*', type='json', methods=['GET'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
@@ -19,7 +19,7 @@ class ToolsControl(http.Controller):
 
         return alerts
 
-    @http.route('/create_alert', auth="public", type='json')
+    @http.route('/create_alert', auth='user', website=False, crf=True, cors='*', type='json', methods=['POST'])
     def create(self, **rec):
         if http.request.render:
             if rec['action']:
@@ -33,6 +33,6 @@ class ToolsControl(http.Controller):
                 args = {'success': True, 'message': 'Success', 'ID': new_alert.id}
         return args
 
-    @http.route('/ping', type='json', crf=False)
+    @http.route('/ping', type='json', auth='user', crf=False)
     def ping(self):
         return {'success': True}
