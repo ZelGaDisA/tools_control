@@ -33,7 +33,7 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/tools_control_menu.xml',
+        'views/staff_control_menu.xml',
     ],
     'application': True,
     'license': 'LGPL-3'
