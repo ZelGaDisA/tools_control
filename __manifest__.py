@@ -3,11 +3,16 @@
     'name': "Tools control",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Tool Control app and Tool Control ERP is a system that helps to keep the workplace, documentation and team relationships in order. 
+    """,
 
     'description': """
-        Long description of module's purpose
+        Everything is in its place 
+        An employee used a tool but forgot to return or damaged it? No more lost inventory, no more lost profits!  
+        Tool Control ERP is a convenient repository for reports created in ToolControl mobile application. 
+        
+        The ToolControl app takes a photo of a worker at the moment when she/he takes a tool. 
+        Images are sent to Tool Control ERP, where you can always check who took this or that tool last and contact that person directly.  
     """,
 
     'author': "5sControl",
