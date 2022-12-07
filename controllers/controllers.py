@@ -3,7 +3,7 @@ from odoo.http import request
 
 
 class ToolsControl(http.Controller):
-    @http.route('/tools/get_all_alerts', auth='user', type='json')
+    @http.route('/tools/get_all_alerts', auth='user', type='json', method=['POST', 'OPTIONS'])
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
