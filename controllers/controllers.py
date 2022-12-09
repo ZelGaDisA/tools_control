@@ -53,12 +53,15 @@ class ToolsControl(http.Controller):
         headers = {'Content-Type': 'application/json'}
         try:
             response = requests.request("GET", urls, headers=headers, data=payload)
+            if response.json().get('error'):
+                return response.json()
+            session_id = ((response.headers.get("Set-Cookie").split(';')[0]).split('session_id=')[1])
+            data_response = (response.json())
+            data = {
+                'data': data_response,
+                'session_id': session_id,
+            }
+            return data
         except ValueError:
             return ValueError
-        session_id = ((response.headers.get("Set-Cookie").split(';')[0]).split('session_id=')[1])
-        data_response = (response.json())
-        data = {
-            'data': data_response,
-            'session_id': session_id,
-        }
-        return data
+
