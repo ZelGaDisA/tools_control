@@ -1,5 +1,5 @@
-<h1>name - Tool Control ERP</h1>
-<h2>summary - Convenient repository for reports created in ToolControl mobile application.</h2>
+<h1>Tool Control ERP</h1>
+<h2>Convenient repository for reports created in ToolControl mobile application.</h2>
 
 <h3>Description</h3>
 
