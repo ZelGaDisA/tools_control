@@ -1,7 +1,5 @@
 from odoo import http
 from odoo.http import request
-import requests
-import json
 
 
 class ToolsControl(http.Controller):
@@ -38,30 +36,3 @@ class ToolsControl(http.Controller):
     @http.route('/tools/ping', type='json', auth='public')
     def ping(self):
         return {'success': True}
-
-    @http.route('/tools/custom_auth', type='json', auth='public')
-    def get_session_id(self, url, db, login, password):
-        urls = f"{url}/web/session/authenticate"
-        payload = json.dumps({
-            "jsonpc": "2.0",
-            "params": {
-                "db": db,
-                "login": login,
-                "password": password
-            }
-        })
-        headers = {'Content-Type': 'application/json'}
-        try:
-            response = requests.request("GET", urls, headers=headers, data=payload)
-            if response.json().get('error'):
-                return response.json()
-            session_id = ((response.headers.get("Set-Cookie").split(';')[0]).split('session_id=')[1])
-            data_response = (response.json())
-            data = {
-                'data': data_response,
-                'session_id': session_id,
-            }
-            return data
-        except ValueError:
-            return ValueError
-
