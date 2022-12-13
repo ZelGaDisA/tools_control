@@ -63,7 +63,7 @@
             <sheet>
              <div class="oe_button_box" name="button_box">
              </div>
-                  <field name="photo" widget="image" options="{'size': [100, 200]}" class="oe_avatar"/>
+                  <field name="photo" widget="image" options="{'size': [600, 800]}" class="oe_avatar"/>
                <div name="title_name" class="oe_title">
                    <h1>
                        <table>
